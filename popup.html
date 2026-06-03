@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreshPass</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- 顶部栏 -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+          </svg>
+        </span>
+        <span class="brand-name">FreshPass</span>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button class="tab active" data-view="home" role="tab">首页</button>
+        <button class="tab" data-view="settings" role="tab">设置</button>
+        <button class="tab" data-view="history" role="tab">记录</button>
+      </nav>
+    </header>
+
+    <main class="content">
+      <!-- ============ 首页 ============ -->
+      <section class="view view-home active" data-view="home">
+        <div class="pwd-card">
+          <div class="pwd-display" id="pwdDisplay" tabindex="0" title="点击选中密码"></div>
+          <div class="pwd-meta">
+            <div class="meta-left">
+              <span class="strength-badge" id="strengthBadge">强</span>
+              <span class="meta-len" id="metaLen">长度 16 位</span>
+            </div>
+            <div class="strength-bar"><span id="strengthFill"></span></div>
+          </div>
+        </div>
+
+        <div class="refresh-row">
+          <span class="refresh-dot" id="refreshDot"></span>
+          <span id="refreshText">将在 60 秒后自动刷新</span>
+        </div>
+
+        <div class="error-banner" id="homeError" hidden></div>
+
+        <div class="actions">
+          <button class="btn btn-primary btn-copy" id="copyBtn">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>复制密码</span>
+          </button>
+          <div class="actions-secondary">
+            <button class="btn btn-ghost" id="regenBtn">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              <span>重新生成</span>
+            </button>
+            <button class="btn btn-ghost" id="lockBtn">
+              <svg class="lock-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              <span id="lockLabel">锁定</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="quick-rules" id="quickRules">
+          <div class="qr-title">快捷设置</div>
+          <div class="qr-length">
+            <label>密码长度 <b id="qrLenValue">16</b></label>
+            <input type="range" id="qrLength" min="8" max="64" value="16" />
+          </div>
+          <div class="qr-chips">
+            <button class="chip active" data-flag="useUppercase">A-Z</button>
+            <button class="chip active" data-flag="useLowercase">a-z</button>
+            <button class="chip active" data-flag="useNumbers">0-9</button>
+            <button class="chip active" data-flag="useSymbols">!@#</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 设置 ============ -->
+      <section class="view view-settings" data-view="settings">
+        <div class="group">
+          <div class="group-title">外观</div>
+          <div class="field">
+            <div class="field-head"><label>主题</label></div>
+            <div class="segmented" id="themeMode">
+              <button data-val="system">跟随系统</button>
+              <button data-val="light">亮色</button>
+              <button data-val="dark">暗色</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="group-title">密码规则</div>
+
+          <div class="field">
+            <div class="field-head">
+              <label for="setLength">密码长度</label>
+              <b id="setLenValue">16</b>
+            </div>
+            <input type="range" id="setLength" min="8" max="64" value="16" />
+          </div>
+
+          <div class="field toggle-field">
+            <label>包含大写字母 (A-Z)</label>
+            <label class="switch"><input type="checkbox" data-setting="useUppercase"><span class="slider"></span></label>
+          </div>
+          <div class="field toggle-field">
+            <label>包含小写字母 (a-z)</label>
+            <label class="switch"><input type="checkbox" data-setting="useLowercase"><span class="slider"></span></label>
+          </div>
+          <div class="field toggle-field">
+            <label>包含数字 (0-9)</label>
+            <label class="switch"><input type="checkbox" data-setting="useNumbers"><span class="slider"></span></label>
+          </div>
+          <div class="field toggle-field">
+            <label>包含特殊符号</label>
+            <label class="switch"><input type="checkbox" data-setting="useSymbols"><span class="slider"></span></label>
+          </div>
+
+          <div class="field" id="symbolModeField">
+            <div class="field-head"><label>特殊符号模式</label></div>
+            <div class="segmented" id="symbolMode">
+              <button data-val="common">常用</button>
+              <button data-val="full">完整</button>
+              <button data-val="custom">自定义</button>
+            </div>
+            <input type="text" class="text-input" id="customSymbols" placeholder="输入允许使用的符号，如 !@#_-" hidden />
+            <div class="hint" id="symbolHint">常用符号：!@#$%^&amp;*</div>
+          </div>
+
+          <div class="field toggle-field">
+            <label>每类字符至少出现一次</label>
+            <label class="switch"><input type="checkbox" data-setting="requireEachType"><span class="slider"></span></label>
+          </div>
+          <div class="field toggle-field">
+            <label>排除易混淆字符 (O0Il1)</label>
+            <label class="switch"><input type="checkbox" data-setting="excludeSimilar"><span class="slider"></span></label>
+          </div>
+
+          <div class="field">
+            <div class="field-head"><label for="customExcludeChars">自定义排除字符</label></div>
+            <input type="text" class="text-input" id="customExcludeChars" placeholder="这些字符不会出现，如 &quot;'\|/" />
+          </div>
+
+          <div class="field toggle-field">
+            <label>禁止重复字符</label>
+            <label class="switch"><input type="checkbox" data-setting="noRepeatChars"><span class="slider"></span></label>
+          </div>
+          <div class="field toggle-field">
+            <label>禁止连续字符 (abc/123)</label>
+            <label class="switch"><input type="checkbox" data-setting="noSequentialChars"><span class="slider"></span></label>
+          </div>
+          <div class="field toggle-field">
+            <label>首字母大写</label>
+            <label class="switch"><input type="checkbox" data-setting="capitalizeFirst"><span class="slider"></span></label>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="group-title">自动刷新</div>
+          <div class="field toggle-field">
+            <label>开启自动刷新</label>
+            <label class="switch"><input type="checkbox" data-setting="autoRefresh"><span class="slider"></span></label>
+          </div>
+          <div class="field" id="intervalField">
+            <div class="field-head"><label>刷新间隔</label></div>
+            <div class="segmented small" id="intervalPreset">
+              <button data-val="15">15s</button>
+              <button data-val="30">30s</button>
+              <button data-val="60">60s</button>
+              <button data-val="120">120s</button>
+              <button data-val="300">300s</button>
+              <button data-val="custom">自定义</button>
+            </div>
+            <div class="inline-input" id="customIntervalWrap" hidden>
+              <input type="number" class="text-input" id="customInterval" min="10" max="3600" placeholder="10 - 3600" />
+              <span>秒</span>
+            </div>
+          </div>
+          <div class="field toggle-field">
+            <label>复制后锁定密码</label>
+            <label class="switch"><input type="checkbox" data-setting="lockAfterCopy"><span class="slider"></span></label>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="group-title">复制记录</div>
+          <div class="field toggle-field">
+            <label>保存复制记录</label>
+            <label class="switch"><input type="checkbox" data-setting="saveCopyHistory"><span class="slider"></span></label>
+          </div>
+          <div class="field">
+            <div class="field-head"><label for="historyLimit">最大保存条数</label></div>
+            <select class="text-input" id="historyLimit">
+              <option value="10">10 条</option>
+              <option value="20">20 条</option>
+              <option value="50">50 条</option>
+              <option value="100">100 条</option>
+              <option value="unlimited">不限制</option>
+            </select>
+          </div>
+          <div class="field">
+            <div class="field-head"><label for="historyRetentionDays">自动清理周期</label></div>
+            <select class="text-input" id="historyRetentionDays">
+              <option value="1">1 天</option>
+              <option value="7">7 天</option>
+              <option value="30">30 天</option>
+              <option value="90">90 天</option>
+              <option value="never">永不清理</option>
+            </select>
+          </div>
+          <div class="field toggle-field">
+            <label>记录默认遮罩显示</label>
+            <label class="switch"><input type="checkbox" data-setting="maskHistoryByDefault"><span class="slider"></span></label>
+          </div>
+        </div>
+
+        <div class="group">
+          <div class="group-title">安全与隐私</div>
+          <p class="privacy-text">
+            本插件不会上传、同步或分享你的密码。生成的密码仅在本地浏览器中处理。
+            复制记录仅保存你主动点击复制的密码。请勿在公共电脑或他人设备上启用复制记录功能。
+          </p>
+          <button class="btn btn-soft full" id="resetBtn">恢复默认设置</button>
+        </div>
+
+        <div class="settings-footer">
+          <button class="btn btn-primary full" id="saveBtn">保存设置</button>
+        </div>
+      </section>
+
+      <!-- ============ 复制记录 ============ -->
+      <section class="view view-history" data-view="history">
+        <div class="history-head">
+          <span id="historyCount">0 条记录</span>
+          <button class="link-btn danger" id="clearAllBtn">清空全部</button>
+        </div>
+        <div class="history-list" id="historyList"></div>
+        <div class="empty-state" id="historyEmpty" hidden>
+          <div class="empty-icon">🗂️</div>
+          <div class="empty-title">暂无复制记录</div>
+          <div class="empty-desc">点击首页的「复制密码」后，会在这里看到记录。</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Toast -->
+    <div class="toast" id="toast" hidden></div>
+
+    <!-- 通用确认弹窗 -->
+    <div class="modal-overlay" id="modal" hidden>
+      <div class="modal">
+        <div class="modal-title" id="modalTitle"></div>
+        <div class="modal-body" id="modalBody"></div>
+        <div class="modal-actions">
+          <button class="btn btn-soft" id="modalCancel">取消</button>
+          <button class="btn btn-primary" id="modalConfirm">确认</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="utils/passwordGenerator.js"></script>
+  <script src="utils/strength.js"></script>
+  <script src="utils/storage.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
