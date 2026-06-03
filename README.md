@@ -1,65 +1,65 @@
-# FreshPass · 密码生成器
+# FreshPass
 
-一个本地优先、隐私友好、打开即用的 Chrome 密码生成器插件（Manifest V3）。
+A local-first, privacy-friendly Chrome password generator extension built with Manifest V3.
 
-> 打开即生成 · 默认 60 秒自动刷新 · 规则自由配置 · 复制才记录 · 本地存储 · 不上传密码
+> Generate instantly · Auto-refresh by default · Fully customizable rules · Copy-only history · Local storage · No password uploads
 
-## 功能特性
+## Features
 
-- **打开即生成**：点击图标立即按你的规则生成一个新强密码
-- **自动刷新**：默认每 60 秒刷新，可选 15/30/60/120/300 秒或自定义（10–3600 秒）
-- **手动重新生成 / 锁定**：随时重新生成，或锁定当前密码暂停刷新
-- **规则可定制**：
-  - 密码长度 8–64 位
-  - 大写 / 小写 / 数字 / 特殊符号
-  - 符号模式：常用 `!@#$%^&*` / 完整 / 自定义
-  - 每类字符至少出现一次
-  - 排除易混淆字符（O0Il1）
-  - 自定义排除字符
-  - 禁止重复字符 / 禁止连续字符
-  - 首字母大写（强制以大写字母开头）
-- **亮色 / 暗色主题**：跟随系统，或手动切换亮色 / 暗色
-- **密码强度评估**：弱 / 中 / 强 / 极强，带强度进度条
-- **复制记录**：仅记录你主动复制过的密码，支持遮罩显示、再次复制、删除单条、清空全部
-- **记录管理**：最大条数限制、自动清理周期、默认遮罩显示
-- **恢复默认设置**：一键还原规则（不会删除复制记录）
+- **Instant generation**: click the extension icon to generate a fresh strong password.
+- **Auto refresh**: refreshes every 60 seconds by default, with presets for 15/30/60/120/300 seconds or a custom interval from 10 to 3600 seconds.
+- **Regenerate or lock**: regenerate manually at any time, or lock the current password to pause refreshing.
+- **Customizable password rules**:
+  - Password length from 8 to 64 characters
+  - Uppercase, lowercase, numbers, and special symbols
+  - Symbol modes: common `!@#$%^&*`, full, or custom
+  - Require at least one character from each selected type
+  - Exclude ambiguous characters such as `O0Il1`
+  - Custom excluded characters
+  - Disallow repeated characters or sequential characters
+  - Optional uppercase first character
+- **Light and dark themes**: follow the system theme or choose manually.
+- **Strength evaluation**: weak, medium, strong, and very strong levels with a progress bar.
+- **Copy history**: records only passwords you explicitly copy, with masking, re-copy, delete, and clear-all actions.
+- **History controls**: maximum entry limit, automatic cleanup period, and masked-by-default display.
+- **Reset defaults**: restore password rules without deleting copy history.
 
-## 安装（开发者模式加载）
+## Installation
 
-1. 打开 Chrome，访问 `chrome://extensions/`
-2. 右上角开启「开发者模式」
-3. 点击「加载已解压的扩展程序」
-4. 选择本项目目录 `密码生成器/`
-5. 点击工具栏的 FreshPass 图标即可使用
+1. Open Chrome and visit `chrome://extensions/`.
+2. Enable **Developer mode** in the top-right corner.
+3. Click **Load unpacked**.
+4. Select this project folder.
+5. Click the FreshPass icon in the toolbar to use the extension.
 
-## 隐私说明
+## Privacy
 
-- 所有密码均在本地浏览器中生成（Web Crypto API，加密级随机数）
-- 不上传、不同步、不分享你的密码
-- 不读取网页内容、不追踪浏览记录
-- 复制记录仅在你点击「复制密码」时保存到 `chrome.storage.local`
-- 请勿在公共电脑或他人设备上启用复制记录功能
+- Passwords are generated locally in your browser using the Web Crypto API.
+- Passwords are not uploaded, synced, or shared.
+- The extension does not read webpage content or track browsing history.
+- Copy history is saved to `chrome.storage.local` only when you click **Copy password**.
+- Avoid enabling copy history on public or shared devices.
 
-## 权限
+## Permissions
 
-仅申请一个权限：
+FreshPass requests only one permission:
 
-| 权限      | 用途                     |
-| ------- | ---------------------- |
-| storage | 在本地保存你的设置和复制记录 |
+| Permission | Purpose |
+| --- | --- |
+| `storage` | Store settings and copied-password history locally. |
 
-## 文件结构
+## Project Structure
 
 ```text
-密码生成器/
+FreshPass/
 ├── manifest.json
-├── popup.html              # 弹窗界面（首页 / 设置 / 记录 三视图）
-├── popup.css               # 现代化深色主题样式
-├── popup.js                # 主控制器
+├── popup.html
+├── popup.css
+├── popup.js
 ├── utils/
-│   ├── passwordGenerator.js  # Web Crypto 密码生成
-│   ├── strength.js           # 强度评估
-│   └── storage.js            # chrome.storage.local 封装
+│   ├── passwordGenerator.js
+│   ├── strength.js
+│   └── storage.js
 ├── assets/
 │   ├── icon16.png
 │   ├── icon48.png
@@ -67,11 +67,13 @@
 └── README.md
 ```
 
-## 技术栈
+## Tech Stack
 
 - Chrome Extension Manifest V3
-- 原生 HTML / CSS / JavaScript（无构建步骤、零依赖）
-- Web Crypto API · Clipboard API · chrome.storage.local
+- Vanilla HTML, CSS, and JavaScript
+- Web Crypto API
+- Clipboard API
+- `chrome.storage.local`
 
 ## License
 
