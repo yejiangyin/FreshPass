@@ -23,6 +23,7 @@ const DEFAULT_SETTINGS = {
   historyRetentionDays: 30, // 数字或 "never"
   maskHistoryByDefault: true,
   theme: "system", // system | light | dark
+  language: "zh", // zh | en
 };
 
 const KEYS = {

@@ -5,6 +5,254 @@
   const FP = window.FreshPass;
   const { storage, generatePassword, evaluateStrength, PasswordError, constants } = FP;
 
+  const I18N = {
+    zh: {
+      navHome: "首页",
+      navSettings: "设置",
+      navHistory: "记录",
+      selectPasswordTitle: "点击选中密码",
+      copyPassword: "复制密码",
+      copied: "已复制",
+      copyFailed: "复制失败",
+      copyFailedManual: "复制失败，请手动复制",
+      copiedToClipboard: "已复制到剪贴板",
+      recordSaveFailed: "密码已复制，但记录保存失败",
+      regenerate: "重新生成",
+      lock: "锁定",
+      unlock: "解除锁定",
+      quickSettings: "快捷设置",
+      appearance: "外观",
+      theme: "主题",
+      themeSystem: "跟随系统",
+      themeLight: "亮色",
+      themeDark: "暗色",
+      language: "语言",
+      passwordRules: "密码规则",
+      passwordLength: "密码长度",
+      includeUppercase: "包含大写字母 (A-Z)",
+      includeLowercase: "包含小写字母 (a-z)",
+      includeNumbers: "包含数字 (0-9)",
+      includeSymbols: "包含特殊符号",
+      symbolMode: "特殊符号模式",
+      symbolCommon: "常用",
+      symbolFull: "完整",
+      symbolCustom: "自定义",
+      customSymbolsPlaceholder: "输入允许使用的符号，如 !@#_-",
+      requireEachType: "每类字符至少出现一次",
+      excludeSimilar: "排除易混淆字符 (O0Il1)",
+      customExcludeChars: "自定义排除字符",
+      customExcludePlaceholder: "这些字符不会出现，如 \"'\\|/",
+      noRepeatChars: "禁止重复字符",
+      noSequentialChars: "禁止连续字符 (abc/123)",
+      capitalizeFirst: "首字母大写",
+      autoRefresh: "自动刷新",
+      enableAutoRefresh: "开启自动刷新",
+      refreshInterval: "刷新间隔",
+      custom: "自定义",
+      seconds: "秒",
+      lockAfterCopy: "复制后锁定密码",
+      copyHistory: "复制记录",
+      saveCopyHistory: "保存复制记录",
+      historyLimit: "最大保存条数",
+      historyLimit10: "10 条",
+      historyLimit20: "20 条",
+      historyLimit50: "50 条",
+      historyLimit100: "100 条",
+      unlimited: "不限制",
+      historyRetentionDays: "自动清理周期",
+      retention1: "1 天",
+      retention7: "7 天",
+      retention30: "30 天",
+      retention90: "90 天",
+      neverClean: "永不清理",
+      maskHistoryByDefault: "记录默认遮罩显示",
+      securityPrivacy: "安全与隐私",
+      privacyText: "本插件不会上传、同步或分享你的密码。生成的密码仅在本地浏览器中处理。复制记录仅保存你主动点击复制的密码。请勿在公共电脑或他人设备上启用复制记录功能。",
+      resetDefaults: "恢复默认设置",
+      saveSettings: "保存设置",
+      clearAll: "清空全部",
+      emptyHistoryTitle: "暂无复制记录",
+      emptyHistoryDesc: "点击首页的「复制密码」后，会在这里看到记录。",
+      strength_weak: "弱",
+      strength_medium: "中",
+      strength_strong: "强",
+      strength_veryStrong: "极强",
+      lengthMeta: "长度 {length} 位",
+      refreshNormal: "将在 {seconds} 秒后自动刷新",
+      refreshLocked: "当前密码已锁定",
+      refreshDisabled: "自动刷新已关闭",
+      refreshError: "当前规则错误，无法生成",
+      generateFailed: "生成失败，请检查规则",
+      noCharType: "请至少选择一种字符类型",
+      minLength: "密码长度不能小于 8 位",
+      maxLength: "密码长度不能超过 64 位",
+      customSymbolsRequired: "请填写自定义符号或切换符号模式",
+      invalidRules: "规则无效",
+      settingsSaved: "设置已保存",
+      resetSettingsTitle: "恢复默认设置",
+      resetSettingsBody: "确认恢复默认设置？复制记录不会被删除。",
+      resetSettingsConfirm: "恢复",
+      settingsReset: "已恢复默认设置",
+      disableHistoryTitle: "关闭复制记录",
+      disableHistoryBody: "关闭后新的复制密码将不再保存。是否同时清空已有复制记录？",
+      clear: "清空",
+      keep: "保留",
+      clearAllTitle: "清空全部记录",
+      clearAllBody: "确认清空所有复制记录？该操作不可恢复。",
+      cleared: "已清空",
+      historyCount: "{count} 条记录",
+      itemLength: "{length} 位",
+      copyCount: "复制 {count} 次",
+      show: "显示",
+      hide: "隐藏",
+      copy: "复制",
+      delete: "删除",
+      showPasswordTitle: "显示完整密码",
+      showPasswordBody: "该内容为敏感信息，确认显示完整密码？",
+      deleteRecordTitle: "删除记录",
+      deleteRecordBody: "确认删除这条复制记录？",
+      confirm: "确认",
+      cancel: "取消",
+      today: "今天",
+      yesterday: "昨天",
+      dateFormat: "{month}月{day}日 {time}",
+      symbolHintCommon: "常用符号：{symbols}",
+      symbolHintFull: "完整符号：{symbols}",
+    },
+    en: {
+      navHome: "Home",
+      navSettings: "Settings",
+      navHistory: "History",
+      selectPasswordTitle: "Click to select password",
+      copyPassword: "Copy password",
+      copied: "Copied",
+      copyFailed: "Copy failed",
+      copyFailedManual: "Copy failed. Please copy manually.",
+      copiedToClipboard: "Copied to clipboard",
+      recordSaveFailed: "Password copied, but history could not be saved.",
+      regenerate: "Regenerate",
+      lock: "Lock",
+      unlock: "Unlock",
+      quickSettings: "Quick Settings",
+      appearance: "Appearance",
+      theme: "Theme",
+      themeSystem: "System",
+      themeLight: "Light",
+      themeDark: "Dark",
+      language: "Language",
+      passwordRules: "Password Rules",
+      passwordLength: "Password length",
+      includeUppercase: "Include uppercase (A-Z)",
+      includeLowercase: "Include lowercase (a-z)",
+      includeNumbers: "Include numbers (0-9)",
+      includeSymbols: "Include symbols",
+      symbolMode: "Symbol mode",
+      symbolCommon: "Common",
+      symbolFull: "Full",
+      symbolCustom: "Custom",
+      customSymbolsPlaceholder: "Allowed symbols, e.g. !@#_-",
+      requireEachType: "Require each selected type",
+      excludeSimilar: "Exclude ambiguous characters (O0Il1)",
+      customExcludeChars: "Custom excluded characters",
+      customExcludePlaceholder: "Characters to exclude, e.g. \"'\\|/",
+      noRepeatChars: "Disallow repeated characters",
+      noSequentialChars: "Disallow sequences (abc/123)",
+      capitalizeFirst: "Uppercase first character",
+      autoRefresh: "Auto Refresh",
+      enableAutoRefresh: "Enable auto refresh",
+      refreshInterval: "Refresh interval",
+      custom: "Custom",
+      seconds: "sec",
+      lockAfterCopy: "Lock after copy",
+      copyHistory: "Copy History",
+      saveCopyHistory: "Save copy history",
+      historyLimit: "Maximum entries",
+      historyLimit10: "10 entries",
+      historyLimit20: "20 entries",
+      historyLimit50: "50 entries",
+      historyLimit100: "100 entries",
+      unlimited: "Unlimited",
+      historyRetentionDays: "Auto cleanup",
+      retention1: "1 day",
+      retention7: "7 days",
+      retention30: "30 days",
+      retention90: "90 days",
+      neverClean: "Never",
+      maskHistoryByDefault: "Mask history by default",
+      securityPrivacy: "Security & Privacy",
+      privacyText: "FreshPass does not upload, sync, or share your passwords. Generated passwords are processed locally in your browser. Copy history stores only passwords you explicitly copy. Avoid enabling copy history on public or shared devices.",
+      resetDefaults: "Reset defaults",
+      saveSettings: "Save settings",
+      clearAll: "Clear all",
+      emptyHistoryTitle: "No copy history",
+      emptyHistoryDesc: "Copied passwords will appear here after you click Copy password.",
+      strength_weak: "Weak",
+      strength_medium: "Medium",
+      strength_strong: "Strong",
+      strength_veryStrong: "Very strong",
+      lengthMeta: "{length} chars",
+      refreshNormal: "Auto-refresh in {seconds}s",
+      refreshLocked: "Password is locked",
+      refreshDisabled: "Auto refresh is off",
+      refreshError: "Current rules cannot generate a password",
+      generateFailed: "Generation failed. Check your rules.",
+      noCharType: "Select at least one character type",
+      minLength: "Password length cannot be less than 8",
+      maxLength: "Password length cannot exceed 64",
+      customSymbolsRequired: "Enter custom symbols or switch symbol mode",
+      invalidRules: "Invalid rules",
+      settingsSaved: "Settings saved",
+      resetSettingsTitle: "Reset defaults",
+      resetSettingsBody: "Reset to default settings? Copy history will not be deleted.",
+      resetSettingsConfirm: "Reset",
+      settingsReset: "Defaults restored",
+      disableHistoryTitle: "Disable copy history",
+      disableHistoryBody: "New copied passwords will no longer be saved. Clear existing copy history too?",
+      clear: "Clear",
+      keep: "Keep",
+      clearAllTitle: "Clear all history",
+      clearAllBody: "Clear all copy history? This cannot be undone.",
+      cleared: "Cleared",
+      historyCount: "{count} records",
+      itemLength: "{length} chars",
+      copyCount: "Copied {count} times",
+      show: "Show",
+      hide: "Hide",
+      copy: "Copy",
+      delete: "Delete",
+      showPasswordTitle: "Show full password",
+      showPasswordBody: "This is sensitive information. Show the full password?",
+      deleteRecordTitle: "Delete record",
+      deleteRecordBody: "Delete this copy history record?",
+      confirm: "Confirm",
+      cancel: "Cancel",
+      today: "Today",
+      yesterday: "Yesterday",
+      dateFormat: "{month}/{day} {time}",
+      symbolHintCommon: "Common symbols: {symbols}",
+      symbolHintFull: "Full symbols: {symbols}",
+    },
+  };
+
+  const ERROR_TRANSLATIONS = {
+    "请至少选择一种字符类型": "noCharType",
+    "当前规则下没有可用字符，请调整排除字符": "noAvailableChars",
+    "开启「首字母大写」需要可用的大写字母，请调整排除字符": "capitalizeNeedsUpper",
+    "当前可用字符数量不足，请减少密码长度或关闭禁止重复字符": "notEnoughChars",
+    "当前规则过于严格，无法生成密码，请放宽限制": "rulesTooStrict",
+    "生成失败，请检查规则": "generateFailed",
+    "规则无效": "invalidRules",
+  };
+
+  I18N.zh.noAvailableChars = "当前规则下没有可用字符，请调整排除字符";
+  I18N.en.noAvailableChars = "No characters are available under the current rules. Adjust excluded characters.";
+  I18N.zh.capitalizeNeedsUpper = "开启「首字母大写」需要可用的大写字母，请调整排除字符";
+  I18N.en.capitalizeNeedsUpper = "Uppercase first character requires available uppercase letters. Adjust excluded characters.";
+  I18N.zh.notEnoughChars = "当前可用字符数量不足，请减少密码长度或关闭禁止重复字符";
+  I18N.en.notEnoughChars = "Not enough available characters. Reduce length or disable disallow repeated characters.";
+  I18N.zh.rulesTooStrict = "当前规则过于严格，无法生成密码，请放宽限制";
+  I18N.en.rulesTooStrict = "Current rules are too strict to generate a password. Relax the rules.";
+
   // ---- 运行时状态（仅内存） ----
   const state = {
     settings: null,
@@ -23,6 +271,54 @@
 
   const el = {};
 
+  function lang() {
+    return (state.settings && state.settings.language) || "zh";
+  }
+
+  function t(key, vars) {
+    const dict = I18N[lang()] || I18N.zh;
+    let text = dict[key] || I18N.zh[key] || key;
+    if (vars) {
+      Object.entries(vars).forEach(([name, value]) => {
+        text = text.replaceAll("{" + name + "}", String(value));
+      });
+    }
+    return text;
+  }
+
+  function translateError(message) {
+    const raw = String(message || "");
+    const lengthMatch = raw.match(/^当前密码长度不足，至少需要 (\d+) 位以满足所选规则$/);
+    if (lengthMatch) {
+      return lang() === "en"
+        ? `Password length is too short. At least ${lengthMatch[1]} characters are required for the selected rules.`
+        : raw;
+    }
+    const key = ERROR_TRANSLATIONS[raw];
+    return key ? t(key) : raw;
+  }
+
+  function applyLanguage(refreshViews) {
+    const currentLang = lang();
+    document.documentElement.lang = currentLang === "en" ? "en" : "zh-CN";
+    $$("[data-i18n]").forEach((node) => {
+      node.textContent = t(node.dataset.i18n);
+    });
+    $$("[data-i18n-placeholder]").forEach((node) => {
+      node.placeholder = t(node.dataset.i18nPlaceholder);
+    });
+    $$("[data-i18n-title]").forEach((node) => {
+      node.title = t(node.dataset.i18nTitle);
+    });
+    if (state.settings) {
+      $$("#languageMode button").forEach((b) => b.classList.toggle("active", b.dataset.val === currentLang));
+      syncSymbolMode();
+      if (state.currentPassword) renderPassword();
+      setRefreshStatus(currentRefreshStatus());
+      if (state.activeView === "history" && refreshViews) renderHistory();
+    }
+  }
+
   // ================= 初始化 =================
   document.addEventListener("DOMContentLoaded", init);
 
@@ -36,6 +332,7 @@
 
     state.settings = await storage.getSettings();
     applyTheme(state.settings.theme);
+    applyLanguage(false);
     syncQuickRules();
     syncSettingsForm();
     await cleanupHistoryOnOpen();
@@ -116,7 +413,7 @@
         // 不允许关闭最后一个字符类型
         const activeChips = el.chips.filter((c) => c.classList.contains("active"));
         if (chip.classList.contains("active") && activeChips.length === 1) {
-          showToast("请至少选择一种字符类型", true);
+          showToast(t("noCharType"), true);
           return;
         }
         chip.classList.toggle("active");
@@ -151,7 +448,7 @@
       hideHomeError();
       if (resetCountdown) restartCountdown();
     } catch (e) {
-      showHomeError(e instanceof PasswordError ? e.message : "生成失败，请检查规则");
+      showHomeError(e instanceof PasswordError ? translateError(e.message) : t("generateFailed"));
       stopCountdown();
       setRefreshStatus("error");
     }
@@ -161,11 +458,11 @@
     el.pwdDisplay.classList.remove("is-error");
     el.pwdDisplay.textContent = state.currentPassword;
     const s = state.strength;
-    el.strengthBadge.textContent = s.label;
+    el.strengthBadge.textContent = t("strength_" + s.level);
     el.strengthBadge.className = "strength-badge " + s.level;
     el.strengthFill.className = s.level;
     el.strengthFill.style.width = s.score + "%";
-    el.metaLen.textContent = "长度 " + state.currentPassword.length + " 位";
+    el.metaLen.textContent = t("lengthMeta", { length: state.currentPassword.length });
   }
 
   function showHomeError(msg) {
@@ -193,7 +490,7 @@
     } catch (e) {
       setCopyBtnState("error");
       selectText(el.pwdDisplay);
-      showToast("复制失败，请手动复制", true);
+      showToast(t("copyFailedManual"), true);
     }
   }
 
@@ -221,13 +518,13 @@
     const label = el.copyBtn.querySelector("span");
     el.copyBtn.classList.remove("success");
     if (stateName === "success") {
-      label.textContent = "已复制";
+      label.textContent = t("copied");
       el.copyBtn.classList.add("success");
     } else if (stateName === "error") {
-      label.textContent = "复制失败";
+      label.textContent = t("copyFailed");
     }
     state.copyResetTimer = setTimeout(() => {
-      label.textContent = "复制密码";
+      label.textContent = t("copyPassword");
       el.copyBtn.classList.remove("success");
       if (state.activeView === "home") setRefreshStatus(currentRefreshStatus());
     }, 1500);
@@ -239,14 +536,14 @@
   function lock() {
     state.isLocked = true;
     stopCountdown();
-    el.lockLabel.textContent = "解除锁定";
+    el.lockLabel.textContent = t("unlock");
     el.lockBtn.classList.add("is-locked");
     setRefreshStatus("locked");
   }
 
   function unlock() {
     state.isLocked = false;
-    el.lockLabel.textContent = "锁定";
+    el.lockLabel.textContent = t("lock");
     el.lockBtn.classList.remove("is-locked");
     restartCountdown();
   }
@@ -289,11 +586,11 @@
   function setRefreshStatus(status) {
     el.refreshDot.className = "refresh-dot " + (status === "normal" || status === "copied" ? "" : status);
     const texts = {
-      normal: `将在 ${state.remaining} 秒后自动刷新`,
-      locked: "当前密码已锁定",
-      disabled: "自动刷新已关闭",
-      error: "当前规则错误，无法生成",
-      copied: "已复制到剪贴板",
+      normal: t("refreshNormal", { seconds: state.remaining }),
+      locked: t("refreshLocked"),
+      disabled: t("refreshDisabled"),
+      error: t("refreshError"),
+      copied: t("copiedToClipboard"),
     };
     el.refreshText.textContent = texts[status] || texts.normal;
   }
@@ -306,6 +603,15 @@
         state.settings.theme = btn.dataset.val;
         applyTheme(state.settings.theme);
         markActive("#themeMode", btn);
+        await storage.saveSettings(state.settings);
+      });
+    });
+
+    // 语言
+    $$("#languageMode button").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        state.settings.language = btn.dataset.val;
+        applyLanguage(true);
         await storage.saveSettings(state.settings);
       });
     });
@@ -372,6 +678,7 @@
   function syncSettingsForm() {
     const s = state.settings;
     $$("#themeMode button").forEach((b) => b.classList.toggle("active", b.dataset.val === (s.theme || "system")));
+    $$("#languageMode button").forEach((b) => b.classList.toggle("active", b.dataset.val === (s.language || "zh")));
     $("#setLength").value = s.passwordLength;
     $("#setLenValue").textContent = s.passwordLength;
 
@@ -412,8 +719,8 @@
       custom.hidden = true;
       hint.hidden = false;
       hint.textContent = state.settings.symbolMode === "full"
-        ? "完整符号：" + constants.SYMBOLS_FULL
-        : "常用符号：" + constants.SYMBOLS_COMMON;
+        ? t("symbolHintFull", { symbols: constants.SYMBOLS_FULL })
+        : t("symbolHintCommon", { symbols: constants.SYMBOLS_COMMON });
     }
   }
 
@@ -435,42 +742,43 @@
     const s = state.settings;
 
     // 校验
-    if (s.passwordLength < 8) return showToast("密码长度不能小于 8 位", true);
-    if (s.passwordLength > 64) return showToast("密码长度不能超过 64 位", true);
+    if (s.passwordLength < 8) return showToast(t("minLength"), true);
+    if (s.passwordLength > 64) return showToast(t("maxLength"), true);
 
     s.refreshInterval = clampInterval(s.refreshInterval);
 
     if (!s.useUppercase && !s.useLowercase && !s.useNumbers && !s.useSymbols) {
-      return showToast("请至少选择一种字符类型", true);
+      return showToast(t("noCharType"), true);
     }
     if (s.useSymbols && s.symbolMode === "custom" && !(s.customSymbols || "").trim()) {
-      return showToast("请填写自定义符号或切换符号模式", true);
+      return showToast(t("customSymbolsRequired"), true);
     }
 
     // 试生成，校验规则可用
     try {
       generatePassword(s);
     } catch (e) {
-      return showToast(e instanceof PasswordError ? e.message : "规则无效", true);
+      return showToast(e instanceof PasswordError ? translateError(e.message) : t("invalidRules"), true);
     }
 
     await storage.saveSettings(s);
     syncQuickRules();
-    showToast("设置已保存");
+    showToast(t("settingsSaved"));
     generateNew(true);
     switchView("home");
   }
 
   async function onResetSettings() {
     openModal({
-      title: "恢复默认设置",
-      body: "确认恢复默认设置？复制记录不会被删除。",
-      confirmText: "恢复",
+      title: t("resetSettingsTitle"),
+      body: t("resetSettingsBody"),
+      confirmText: t("resetSettingsConfirm"),
       onConfirm: async () => {
         state.settings = await storage.resetSettings();
+        applyLanguage(true);
         syncSettingsForm();
         syncQuickRules();
-        showToast("已恢复默认设置");
+        showToast(t("settingsReset"));
         generateNew(true);
       },
     });
@@ -480,10 +788,10 @@
     storage.getHistory().then((h) => {
       if (h.length === 0) return;
       openModal({
-        title: "关闭复制记录",
-        body: "关闭后新的复制密码将不再保存。是否同时清空已有复制记录？",
-        confirmText: "清空",
-        cancelText: "保留",
+        title: t("disableHistoryTitle"),
+        body: t("disableHistoryBody"),
+        confirmText: t("clear"),
+        cancelText: t("keep"),
         onConfirm: async () => {
           await storage.saveHistory([]);
           if (state.activeView === "history") renderHistory();
@@ -496,13 +804,13 @@
   function bindHistory() {
     el.clearAllBtn.addEventListener("click", () => {
       openModal({
-        title: "清空全部记录",
-        body: "确认清空所有复制记录？该操作不可恢复。",
-        confirmText: "清空",
+        title: t("clearAllTitle"),
+        body: t("clearAllBody"),
+        confirmText: t("clear"),
         onConfirm: async () => {
           await storage.saveHistory([]);
           renderHistory();
-          showToast("已清空");
+          showToast(t("cleared"));
         },
       });
     });
@@ -534,7 +842,7 @@
       history = storage.pruneHistory(history, state.settings);
       await storage.saveHistory(history);
     } catch (e) {
-      showToast("密码已复制，但记录保存失败", true);
+      showToast(t("recordSaveFailed"), true);
     }
   }
 
@@ -565,7 +873,7 @@
     const history = await storage.getHistory();
     history.sort((a, b) => (b.lastCopiedAt || b.createdAt) - (a.lastCopiedAt || a.createdAt));
 
-    el.historyCount.textContent = history.length + " 条记录";
+    el.historyCount.textContent = t("historyCount", { count: history.length });
     el.historyList.innerHTML = "";
 
     if (history.length === 0) {
@@ -576,29 +884,28 @@
     el.historyEmpty.hidden = true;
     el.clearAllBtn.style.visibility = "visible";
 
-    const labels = { weak: "弱", medium: "中", strong: "强", veryStrong: "极强" };
-
     history.forEach((item) => {
       const card = document.createElement("div");
       card.className = "h-item";
 
       const masked = maskPassword(item.password);
       const strengthLevel = item.strength || "strong";
+      const strengthLabel = I18N[lang()]["strength_" + strengthLevel] ? t("strength_" + strengthLevel) : t("strength_strong");
 
       card.innerHTML = `
         <div class="h-pwd" data-masked="${escapeHtml(masked)}" data-full="${escapeHtml(item.password)}" data-shown="0">${escapeHtml(state.settings.maskHistoryByDefault ? masked : item.password)}</div>
         <div class="h-info">
-          <span class="h-badge ${strengthLevel}">${labels[strengthLevel] || "强"}</span>
-          <span>${item.length} 位</span>
+          <span class="h-badge ${strengthLevel}">${escapeHtml(strengthLabel)}</span>
+          <span>${escapeHtml(t("itemLength", { length: item.length }))}</span>
           <span class="dot"></span>
-          <span>${formatTime(item.lastCopiedAt || item.createdAt)}</span>
+          <span>${escapeHtml(formatTime(item.lastCopiedAt || item.createdAt))}</span>
           <span class="dot"></span>
-          <span>复制 ${item.copyCount || 1} 次</span>
+          <span>${escapeHtml(t("copyCount", { count: item.copyCount || 1 }))}</span>
         </div>
         <div class="h-actions">
-          <button class="toggle">${state.settings.maskHistoryByDefault ? "显示" : "隐藏"}</button>
-          <button class="copy">复制</button>
-          <button class="del">删除</button>
+          <button class="toggle">${state.settings.maskHistoryByDefault ? escapeHtml(t("show")) : escapeHtml(t("hide"))}</button>
+          <button class="copy">${escapeHtml(t("copy"))}</button>
+          <button class="del">${escapeHtml(t("delete"))}</button>
         </div>`;
 
       const pwdEl = card.querySelector(".h-pwd");
@@ -609,7 +916,7 @@
       const setShown = (val) => {
         shown = val;
         pwdEl.textContent = val ? item.password : masked;
-        toggleBtn.textContent = val ? "隐藏" : "显示";
+        toggleBtn.textContent = val ? t("hide") : t("show");
         clearTimeout(autoHideTimer);
         if (val) autoHideTimer = setTimeout(() => setShown(false), 10000);
       };
@@ -617,9 +924,9 @@
       toggleBtn.addEventListener("click", () => {
         if (shown) { setShown(false); return; }
         openModal({
-          title: "显示完整密码",
-          body: "该内容为敏感信息，确认显示完整密码？",
-          confirmText: "显示",
+          title: t("showPasswordTitle"),
+          body: t("showPasswordBody"),
+          confirmText: t("show"),
           onConfirm: () => setShown(true),
         });
       });
@@ -628,18 +935,18 @@
         try {
           await copyToClipboard(item.password);
           await bumpCopy(item.id);
-          showToast("已复制");
+          showToast(t("copied"));
           renderHistory();
         } catch (e) {
-          showToast("复制失败，请手动复制", true);
+          showToast(t("copyFailedManual"), true);
         }
       });
 
       card.querySelector(".del").addEventListener("click", () => {
         openModal({
-          title: "删除记录",
-          body: "确认删除这条复制记录？",
-          confirmText: "删除",
+          title: t("deleteRecordTitle"),
+          body: t("deleteRecordBody"),
+          confirmText: t("delete"),
           onConfirm: async () => {
             const list = (await storage.getHistory()).filter((h) => h.id !== item.id);
             await storage.saveHistory(list);
@@ -680,7 +987,7 @@
     el.modal.addEventListener("click", (e) => { if (e.target === el.modal) closeModal(); });
   }
 
-  function openModal({ title, body, confirmText = "确认", cancelText = "取消", onConfirm }) {
+  function openModal({ title, body, confirmText = t("confirm"), cancelText = t("cancel"), onConfirm }) {
     el.modalTitle.textContent = title;
     el.modalBody.textContent = body;
     el.modalConfirm.textContent = confirmText;
@@ -725,9 +1032,9 @@
     const hm = `${pad(d.getHours())}:${pad(d.getMinutes())}`;
     const sameDay = d.toDateString() === now.toDateString();
     const yesterday = new Date(now); yesterday.setDate(now.getDate() - 1);
-    if (sameDay) return "今天 " + hm;
-    if (d.toDateString() === yesterday.toDateString()) return "昨天 " + hm;
-    return `${d.getMonth() + 1}月${d.getDate()}日 ${hm}`;
+    if (sameDay) return t("today") + " " + hm;
+    if (d.toDateString() === yesterday.toDateString()) return t("yesterday") + " " + hm;
+    return t("dateFormat", { month: d.getMonth() + 1, day: d.getDate(), time: hm });
   }
 
   function escapeHtml(str) {
