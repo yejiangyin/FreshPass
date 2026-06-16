@@ -19,9 +19,9 @@
         <span class="brand-name">FreshPass</span>
       </div>
       <nav class="tabs" role="tablist">
-        <button class="tab active" data-view="home" role="tab">首页</button>
-        <button class="tab" data-view="settings" role="tab">设置</button>
-        <button class="tab" data-view="history" role="tab">记录</button>
+        <button class="tab active" data-view="home" role="tab" data-i18n="navHome">首页</button>
+        <button class="tab" data-view="settings" role="tab" data-i18n="navSettings">设置</button>
+        <button class="tab" data-view="history" role="tab" data-i18n="navHistory">记录</button>
       </nav>
     </header>
 
@@ -29,7 +29,7 @@
       <!-- ============ 首页 ============ -->
       <section class="view view-home active" data-view="home">
         <div class="pwd-card">
-          <div class="pwd-display" id="pwdDisplay" tabindex="0" title="点击选中密码"></div>
+          <div class="pwd-display" id="pwdDisplay" tabindex="0" title="点击选中密码" data-i18n-title="selectPasswordTitle"></div>
           <div class="pwd-meta">
             <div class="meta-left">
               <span class="strength-badge" id="strengthBadge">强</span>
@@ -49,12 +49,12 @@
         <div class="actions">
           <button class="btn btn-primary btn-copy" id="copyBtn">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <span>复制密码</span>
+            <span data-i18n="copyPassword">复制密码</span>
           </button>
           <div class="actions-secondary">
             <button class="btn btn-ghost" id="regenBtn">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 4v6h-6M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-              <span>重新生成</span>
+              <span data-i18n="regenerate">重新生成</span>
             </button>
             <button class="btn btn-ghost" id="lockBtn">
               <svg class="lock-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
@@ -64,9 +64,9 @@
         </div>
 
         <div class="quick-rules" id="quickRules">
-          <div class="qr-title">快捷设置</div>
+          <div class="qr-title" data-i18n="quickSettings">快捷设置</div>
           <div class="qr-length">
-            <label>密码长度 <b id="qrLenValue">16</b></label>
+            <label><span data-i18n="passwordLength">密码长度</span> <b id="qrLenValue">16</b></label>
             <input type="range" id="qrLength" min="8" max="64" value="16" />
           </div>
           <div class="qr-chips">
@@ -81,154 +81,161 @@
       <!-- ============ 设置 ============ -->
       <section class="view view-settings" data-view="settings">
         <div class="group">
-          <div class="group-title">外观</div>
+          <div class="group-title" data-i18n="appearance">外观</div>
           <div class="field">
-            <div class="field-head"><label>主题</label></div>
+            <div class="field-head"><label data-i18n="theme">主题</label></div>
             <div class="segmented" id="themeMode">
-              <button data-val="system">跟随系统</button>
-              <button data-val="light">亮色</button>
-              <button data-val="dark">暗色</button>
+              <button data-val="system" data-i18n="themeSystem">跟随系统</button>
+              <button data-val="light" data-i18n="themeLight">亮色</button>
+              <button data-val="dark" data-i18n="themeDark">暗色</button>
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-head"><label data-i18n="language">语言</label></div>
+            <div class="segmented" id="languageMode">
+              <button data-val="zh">中文</button>
+              <button data-val="en">English</button>
             </div>
           </div>
         </div>
 
         <div class="group">
-          <div class="group-title">密码规则</div>
+          <div class="group-title" data-i18n="passwordRules">密码规则</div>
 
           <div class="field">
             <div class="field-head">
-              <label for="setLength">密码长度</label>
+              <label for="setLength" data-i18n="passwordLength">密码长度</label>
               <b id="setLenValue">16</b>
             </div>
             <input type="range" id="setLength" min="8" max="64" value="16" />
           </div>
 
           <div class="field toggle-field">
-            <label>包含大写字母 (A-Z)</label>
+            <label data-i18n="includeUppercase">包含大写字母 (A-Z)</label>
             <label class="switch"><input type="checkbox" data-setting="useUppercase"><span class="slider"></span></label>
           </div>
           <div class="field toggle-field">
-            <label>包含小写字母 (a-z)</label>
+            <label data-i18n="includeLowercase">包含小写字母 (a-z)</label>
             <label class="switch"><input type="checkbox" data-setting="useLowercase"><span class="slider"></span></label>
           </div>
           <div class="field toggle-field">
-            <label>包含数字 (0-9)</label>
+            <label data-i18n="includeNumbers">包含数字 (0-9)</label>
             <label class="switch"><input type="checkbox" data-setting="useNumbers"><span class="slider"></span></label>
           </div>
           <div class="field toggle-field">
-            <label>包含特殊符号</label>
+            <label data-i18n="includeSymbols">包含特殊符号</label>
             <label class="switch"><input type="checkbox" data-setting="useSymbols"><span class="slider"></span></label>
           </div>
 
           <div class="field" id="symbolModeField">
-            <div class="field-head"><label>特殊符号模式</label></div>
+            <div class="field-head"><label data-i18n="symbolMode">特殊符号模式</label></div>
             <div class="segmented" id="symbolMode">
-              <button data-val="common">常用</button>
-              <button data-val="full">完整</button>
-              <button data-val="custom">自定义</button>
+              <button data-val="common" data-i18n="symbolCommon">常用</button>
+              <button data-val="full" data-i18n="symbolFull">完整</button>
+              <button data-val="custom" data-i18n="symbolCustom">自定义</button>
             </div>
-            <input type="text" class="text-input" id="customSymbols" placeholder="输入允许使用的符号，如 !@#_-" hidden />
+            <input type="text" class="text-input" id="customSymbols" placeholder="输入允许使用的符号，如 !@#_-" data-i18n-placeholder="customSymbolsPlaceholder" hidden />
             <div class="hint" id="symbolHint">常用符号：!@#$%^&amp;*</div>
           </div>
 
           <div class="field toggle-field">
-            <label>每类字符至少出现一次</label>
+            <label data-i18n="requireEachType">每类字符至少出现一次</label>
             <label class="switch"><input type="checkbox" data-setting="requireEachType"><span class="slider"></span></label>
           </div>
           <div class="field toggle-field">
-            <label>排除易混淆字符 (O0Il1)</label>
+            <label data-i18n="excludeSimilar">排除易混淆字符 (O0Il1)</label>
             <label class="switch"><input type="checkbox" data-setting="excludeSimilar"><span class="slider"></span></label>
           </div>
 
           <div class="field">
-            <div class="field-head"><label for="customExcludeChars">自定义排除字符</label></div>
-            <input type="text" class="text-input" id="customExcludeChars" placeholder="这些字符不会出现，如 &quot;'\|/" />
+            <div class="field-head"><label for="customExcludeChars" data-i18n="customExcludeChars">自定义排除字符</label></div>
+            <input type="text" class="text-input" id="customExcludeChars" placeholder="这些字符不会出现，如 &quot;'\|/" data-i18n-placeholder="customExcludePlaceholder" />
           </div>
 
           <div class="field toggle-field">
-            <label>禁止重复字符</label>
+            <label data-i18n="noRepeatChars">禁止重复字符</label>
             <label class="switch"><input type="checkbox" data-setting="noRepeatChars"><span class="slider"></span></label>
           </div>
           <div class="field toggle-field">
-            <label>禁止连续字符 (abc/123)</label>
+            <label data-i18n="noSequentialChars">禁止连续字符 (abc/123)</label>
             <label class="switch"><input type="checkbox" data-setting="noSequentialChars"><span class="slider"></span></label>
           </div>
           <div class="field toggle-field">
-            <label>首字母大写</label>
+            <label data-i18n="capitalizeFirst">首字母大写</label>
             <label class="switch"><input type="checkbox" data-setting="capitalizeFirst"><span class="slider"></span></label>
           </div>
         </div>
 
         <div class="group">
-          <div class="group-title">自动刷新</div>
+          <div class="group-title" data-i18n="autoRefresh">自动刷新</div>
           <div class="field toggle-field">
-            <label>开启自动刷新</label>
+            <label data-i18n="enableAutoRefresh">开启自动刷新</label>
             <label class="switch"><input type="checkbox" data-setting="autoRefresh"><span class="slider"></span></label>
           </div>
           <div class="field" id="intervalField">
-            <div class="field-head"><label>刷新间隔</label></div>
+            <div class="field-head"><label data-i18n="refreshInterval">刷新间隔</label></div>
             <div class="segmented small" id="intervalPreset">
               <button data-val="15">15s</button>
               <button data-val="30">30s</button>
               <button data-val="60">60s</button>
               <button data-val="120">120s</button>
               <button data-val="300">300s</button>
-              <button data-val="custom">自定义</button>
+              <button data-val="custom" data-i18n="custom">自定义</button>
             </div>
             <div class="inline-input" id="customIntervalWrap" hidden>
               <input type="number" class="text-input" id="customInterval" min="10" max="3600" placeholder="10 - 3600" />
-              <span>秒</span>
+              <span data-i18n="seconds">秒</span>
             </div>
           </div>
           <div class="field toggle-field">
-            <label>复制后锁定密码</label>
+            <label data-i18n="lockAfterCopy">复制后锁定密码</label>
             <label class="switch"><input type="checkbox" data-setting="lockAfterCopy"><span class="slider"></span></label>
           </div>
         </div>
 
         <div class="group">
-          <div class="group-title">复制记录</div>
+          <div class="group-title" data-i18n="copyHistory">复制记录</div>
           <div class="field toggle-field">
-            <label>保存复制记录</label>
+            <label data-i18n="saveCopyHistory">保存复制记录</label>
             <label class="switch"><input type="checkbox" data-setting="saveCopyHistory"><span class="slider"></span></label>
           </div>
           <div class="field">
-            <div class="field-head"><label for="historyLimit">最大保存条数</label></div>
+            <div class="field-head"><label for="historyLimit" data-i18n="historyLimit">最大保存条数</label></div>
             <select class="text-input" id="historyLimit">
-              <option value="10">10 条</option>
-              <option value="20">20 条</option>
-              <option value="50">50 条</option>
-              <option value="100">100 条</option>
-              <option value="unlimited">不限制</option>
+              <option value="10" data-i18n="historyLimit10">10 条</option>
+              <option value="20" data-i18n="historyLimit20">20 条</option>
+              <option value="50" data-i18n="historyLimit50">50 条</option>
+              <option value="100" data-i18n="historyLimit100">100 条</option>
+              <option value="unlimited" data-i18n="unlimited">不限制</option>
             </select>
           </div>
           <div class="field">
-            <div class="field-head"><label for="historyRetentionDays">自动清理周期</label></div>
+            <div class="field-head"><label for="historyRetentionDays" data-i18n="historyRetentionDays">自动清理周期</label></div>
             <select class="text-input" id="historyRetentionDays">
-              <option value="1">1 天</option>
-              <option value="7">7 天</option>
-              <option value="30">30 天</option>
-              <option value="90">90 天</option>
-              <option value="never">永不清理</option>
+              <option value="1" data-i18n="retention1">1 天</option>
+              <option value="7" data-i18n="retention7">7 天</option>
+              <option value="30" data-i18n="retention30">30 天</option>
+              <option value="90" data-i18n="retention90">90 天</option>
+              <option value="never" data-i18n="neverClean">永不清理</option>
             </select>
           </div>
           <div class="field toggle-field">
-            <label>记录默认遮罩显示</label>
+            <label data-i18n="maskHistoryByDefault">记录默认遮罩显示</label>
             <label class="switch"><input type="checkbox" data-setting="maskHistoryByDefault"><span class="slider"></span></label>
           </div>
         </div>
 
         <div class="group">
-          <div class="group-title">安全与隐私</div>
-          <p class="privacy-text">
+          <div class="group-title" data-i18n="securityPrivacy">安全与隐私</div>
+          <p class="privacy-text" data-i18n="privacyText">
             本插件不会上传、同步或分享你的密码。生成的密码仅在本地浏览器中处理。
             复制记录仅保存你主动点击复制的密码。请勿在公共电脑或他人设备上启用复制记录功能。
           </p>
-          <button class="btn btn-soft full" id="resetBtn">恢复默认设置</button>
+          <button class="btn btn-soft full" id="resetBtn" data-i18n="resetDefaults">恢复默认设置</button>
         </div>
 
         <div class="settings-footer">
-          <button class="btn btn-primary full" id="saveBtn">保存设置</button>
+          <button class="btn btn-primary full" id="saveBtn" data-i18n="saveSettings">保存设置</button>
         </div>
       </section>
 
@@ -236,13 +243,13 @@
       <section class="view view-history" data-view="history">
         <div class="history-head">
           <span id="historyCount">0 条记录</span>
-          <button class="link-btn danger" id="clearAllBtn">清空全部</button>
+          <button class="link-btn danger" id="clearAllBtn" data-i18n="clearAll">清空全部</button>
         </div>
         <div class="history-list" id="historyList"></div>
         <div class="empty-state" id="historyEmpty" hidden>
           <div class="empty-icon">🗂️</div>
-          <div class="empty-title">暂无复制记录</div>
-          <div class="empty-desc">点击首页的「复制密码」后，会在这里看到记录。</div>
+          <div class="empty-title" data-i18n="emptyHistoryTitle">暂无复制记录</div>
+          <div class="empty-desc" data-i18n="emptyHistoryDesc">点击首页的「复制密码」后，会在这里看到记录。</div>
         </div>
       </section>
     </main>
