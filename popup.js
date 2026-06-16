@@ -69,7 +69,7 @@
       securityPrivacy: "安全与隐私",
       privacyText: "本插件不会上传、同步或分享你的密码。生成的密码仅在本地浏览器中处理。复制记录仅保存你主动点击复制的密码。请勿在公共电脑或他人设备上启用复制记录功能。",
       resetDefaults: "恢复默认设置",
-      saveSettings: "保存设置",
+      saveSettings: "保存规则设置",
       clearAll: "清空全部",
       emptyHistoryTitle: "暂无复制记录",
       emptyHistoryDesc: "点击首页的「复制密码」后，会在这里看到记录。",
@@ -182,7 +182,7 @@
       securityPrivacy: "Security & Privacy",
       privacyText: "FreshPass does not upload, sync, or share your passwords. Generated passwords are processed locally in your browser. Copy history stores only passwords you explicitly copy. Avoid enabling copy history on public or shared devices.",
       resetDefaults: "Reset defaults",
-      saveSettings: "Save settings",
+      saveSettings: "Save rules",
       clearAll: "Clear all",
       emptyHistoryTitle: "No copy history",
       emptyHistoryDesc: "Copied passwords will appear here after you click Copy password.",
@@ -312,6 +312,7 @@
     });
     if (state.settings) {
       $$("#languageMode button").forEach((b) => b.classList.toggle("active", b.dataset.val === currentLang));
+      el.lockLabel.textContent = state.isLocked ? t("unlock") : t("lock");
       syncSymbolMode();
       if (state.currentPassword) renderPassword();
       setRefreshStatus(currentRefreshStatus());
