@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "FreshPass - 密码生成器",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "本地优先的密码生成器：打开即生成、自动刷新、规则可定制，复制才记录，不上传不追踪。",
   "action": {
     "default_popup": "popup.html",
